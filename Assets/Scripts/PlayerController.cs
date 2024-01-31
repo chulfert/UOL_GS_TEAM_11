@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveForce = 5f;
-    public float jumpForce = 3f;
+    public float jumpForce = 13f;
     public float maxSpeed = 10f;
 
     private Rigidbody rb;
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         if (isJumping ) // 
         {
             Debug.Log("Jumping");
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * 30, ForceMode.Impulse);
         }
 
         // Since autorunner, move forward
