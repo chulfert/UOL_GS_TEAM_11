@@ -32,7 +32,7 @@ public class Laser : MonoBehaviour
 
     void UpdateLaserPosition()
     {
-                RaycastHit hit;
+        RaycastHit hit;
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         Vector3 laserEnd;
 

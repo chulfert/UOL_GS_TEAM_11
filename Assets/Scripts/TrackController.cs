@@ -9,7 +9,7 @@ public class TrackController : MonoBehaviour
     float maxForce = 200f;
     Collider playerCollider;
     float minDistance = 5f;
-    float maxDistance = 10f;
+    float maxDistance = 30f;
 
     // Start is called before the first frame update
     void Start()

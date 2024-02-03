@@ -92,8 +92,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 5, z: 1}
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Size: {x: 2, y: 10, z: 1}
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!114 &6361808064778412519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +106,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6363b8a8130000d4b9928d23289994b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxForce: 10
-  maxDistance: 20
-  player_collider: {fileID: 0}
-  minDistance: 10
