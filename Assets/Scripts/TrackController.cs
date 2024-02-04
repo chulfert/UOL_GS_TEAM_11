@@ -6,14 +6,10 @@ using UnityEngine;
 public class TrackController : MonoBehaviour
 {
 
-    [SerializeField]
-    public float maxForce = 5f;
-    [SerializeField]
-    float maxDistance = 20f;
-    [SerializeField]
-    Collider player_collider;
-    [SerializeField]
-    float minDistance = 2f;
+    float maxForce = 200f;
+    Collider playerCollider;
+    float minDistance = 5f;
+    float maxDistance = 30f;
 
     // Start is called before the first frame update
     void Start()
@@ -31,15 +27,15 @@ public class TrackController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            player_collider = other;
+            playerCollider = other;
         }
     }
 
     void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && playerCollider != null)
         {
-            ApplyMagneticForce(player_collider.gameObject);
+            ApplyMagneticForce(playerCollider.gameObject);
         }
     }
 
@@ -49,29 +45,36 @@ public class TrackController : MonoBehaviour
         Vector3 forceDirection = (transform.position - player.transform.position).normalized;
         forceDirection.z = 0;
         float forceMagnitude = CalculateForceMagnitude(player.transform.position);
-        Vector3 forceTotal = forceDirection * forceMagnitude;
-      
+        Vector3 forceTotal = forceDirection * forceMagnitude * 5;
+
+        //limit to y axis
+        forceTotal.x = 0;
+        forceTotal.z = 0;      
         playerRb.AddForce(forceTotal, ForceMode.Acceleration);
     }
 
 
     float CalculateForceMagnitude(Vector3 playerPosition)
     {
-        Vector3 trackPosition2D = new Vector3(transform.position.x, transform.position.y, 0);
-        Vector3 playerPosition2D = new Vector3(playerPosition.x, playerPosition.y, 0);
+        float distance = Mathf.Abs(transform.position.y - playerPosition.y);
+        float normalizedDistance = (distance - minDistance) / (maxDistance - minDistance);
 
-        float distance = Vector3.Distance(trackPosition2D, playerPosition2D);
-        
-        
         if (distance < minDistance)
         {
-            // Inside the minimum distance, reverse the force
-            return -Mathf.Clamp(maxForce * (Mathf.Pow(2, minDistance - distance)), 0, maxForce) ;
+            // Inside the minimum distance, apply a strong repulsive force
+            float repelForce = maxForce * Mathf.Pow((minDistance - distance) / minDistance, 2);
+            return -Mathf.Clamp(repelForce, 0, maxForce);
+        }
+        else if (distance >= minDistance && distance <= maxDistance)
+        {
+            // Between min and max distance, apply an attractive force that increases sharply as the object approaches the track
+            float attractForce = maxForce * normalizedDistance * 0.1f;
+            return Mathf.Clamp(attractForce, 0, maxForce);
         }
         else
         {
-            // Outside the minimum distance, normal attractive force
-            return Mathf.Clamp(maxForce * (1 - Mathf.Pow(distance / maxDistance, 2)  ), 0, maxForce) ;
+            // Beyond max distance, no force is applied
+            return 0;
         }
     }
 }
