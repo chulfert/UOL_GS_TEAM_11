@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private float moveInput;
-    private bool isJumping;
+    private bool isJumping = false;
     private float currentForce;
 
     void Start()
@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Jumping");
             rb.AddForce(Vector3.up * 30, ForceMode.Impulse);
+            isJumping = false;  
         }
 
         // Since autorunner, move forward

@@ -8,6 +8,8 @@ public class TractorBeam : MonoBehaviour
     public float beamRange = 100f;
     public LayerMask collectibleLayer; 
     public TractorBeamVisuals beamVisuals; 
+
+    private BaseCollectible currentCollectible;
     void Update()
     {
         if (Input.GetMouseButtonDown(1)) // Right mouse click
@@ -21,6 +23,11 @@ public class TractorBeam : MonoBehaviour
         if (Input.GetMouseButtonUp(1)) // Right mouse button released
         {
             beamVisuals.StopBeam();
+            if (currentCollectible != null)
+            {
+                currentCollectible.StopAttracting();
+                currentCollectible = null;
+            }
         }
     }
 
@@ -42,10 +49,10 @@ public class TractorBeam : MonoBehaviour
             beamEnd = hit.point;
 
             // Check if the hit object is a collectible and start attracting it
-            BaseCollectible collectible = hit.collider.GetComponent<BaseCollectible>();
-            if (collectible != null)
+            currentCollectible = hit.collider.GetComponent<BaseCollectible>();
+            if (currentCollectible != null)
             {
-                collectible.StartAttracting(gameObject); // Start attracting the collectible
+                currentCollectible.StartAttracting(gameObject); // Start attracting the collectible
             }
         }
         else
