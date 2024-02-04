@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public float health = 50f;
+
     public float moveForce = 5f;
     public float jumpForce = 13f;
     public float maxSpeed = 10f;
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour
         // Since autorunner, move forward
         if(rb.velocity.z < maxSpeed)
         {
-            rb.AddForce(new Vector3(0, 0, 10.0f), ForceMode.Force);
+            rb.AddForce(new Vector3(0, 0, 0.0f), ForceMode.Force);
         }
     }
 }
