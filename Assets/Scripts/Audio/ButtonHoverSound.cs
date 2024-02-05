@@ -18,6 +18,7 @@ public class ButtonHoverSound : MonoBehaviour, IPointerEnterHandler
         audioSource.clip = hoverSound;
         audioSource.loop = false;
         audioSource.playOnAwake = false;
+        audioSource.volume = 0.5f;
         
     }
 

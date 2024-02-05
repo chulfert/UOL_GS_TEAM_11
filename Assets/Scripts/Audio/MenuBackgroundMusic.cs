@@ -11,6 +11,7 @@ public class MenuBackgroundMusic : MonoBehaviour
     void Start()
     {
         AudioSource.PlayClipAtPoint(backgroundMusic, transform.position);
+
     }
 
     // Update is called once per frame
