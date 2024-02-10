@@ -2223,7 +2223,6 @@ GameObject:
   - component: {fileID: 1000388039}
   - component: {fileID: 1000388038}
   - component: {fileID: 1000388037}
-  - component: {fileID: 1000388040}
   - component: {fileID: 1000388041}
   m_Layer: 5
   m_Name: Back Button
@@ -2354,18 +2353,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000388035}
   m_CullTransparentMesh: 0
---- !u!114 &1000388040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000388035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3560365e3e2beb14280f9942ff00c8c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1000388041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3242,7 +3229,6 @@ GameObject:
   - component: {fileID: 1382028573}
   - component: {fileID: 1382028572}
   - component: {fileID: 1382028571}
-  - component: {fileID: 1382028574}
   - component: {fileID: 1382028575}
   m_Layer: 5
   m_Name: Instructions Button
@@ -3373,18 +3359,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382028569}
   m_CullTransparentMesh: 0
---- !u!114 &1382028574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1382028569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3560365e3e2beb14280f9942ff00c8c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1382028575
 MonoBehaviour:
   m_ObjectHideFlags: 0
