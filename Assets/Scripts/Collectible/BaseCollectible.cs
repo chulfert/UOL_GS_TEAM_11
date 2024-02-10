@@ -13,6 +13,11 @@ public class BaseCollectible : MonoBehaviour
         player = playerObject;
     }
 
+    public virtual void StopAttracting()
+    {
+        isAttracted = false;
+    }
+
     protected virtual void Update()
     {
         if (isAttracted)
