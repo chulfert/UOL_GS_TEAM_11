@@ -52,10 +52,10 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(new Vector3(moveInput * currentForce, 0, 0), ForceMode.Force);
 
         // Apply jump force
-        if (isJumping ) // 
+        if (isJumping) // 
         {
             Debug.Log("Jumping");
-            rb.AddForce(Vector3.up * 30, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
         // Since autorunner, move forward
@@ -64,4 +64,5 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(new Vector3(0, 0, 0.0f), ForceMode.Force);
         }
     }
+
 }
