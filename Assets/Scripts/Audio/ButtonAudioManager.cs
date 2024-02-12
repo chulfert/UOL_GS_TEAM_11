@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ public class ButtonAudioManager : MonoBehaviour
         // Create new audio manager on play
         if (audioManager == null)
         {
+            Debug.Log("Audio Manager is Null");
             audioManager = new GameObject("AudioManager");
             DontDestroyOnLoad(audioManager);
         }
@@ -24,11 +26,12 @@ public class ButtonAudioManager : MonoBehaviour
         audioSource = audioManager.GetComponent<AudioSource>();
         if (audioSource == null)
         {
+            Debug.Log("Audio Source is Null");
             audioSource = audioManager.AddComponent<AudioSource>();
             
             // Audio Source properties
             audioSource.loop = true;
-            audioSource.volume = 2.0f;
+         
         }
     }
 
@@ -36,5 +39,21 @@ public class ButtonAudioManager : MonoBehaviour
     {
         // Play the click sound when a button is clicked
         audioSource.PlayOneShot(clickSound);
+    }
+
+    public void UpdateVolume(float volume)
+    {
+        if (audioSource != null)
+        {
+            Debug.Log("Updated volume: " + volume);
+            audioSource.volume = volume;
+            Debug.Log("New volume: " + audioSource);
+            //return true;
+            return;
+        }
+        //return false;
+        throw new Exception("Sopmething went wrong");
+
+        
     }
 }
