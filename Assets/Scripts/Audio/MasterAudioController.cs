@@ -8,14 +8,14 @@ using UnityEngine.EventSystems;
 public class MasterAudioController : MonoBehaviour
 {
     public ButtonAudioManager buttonAudioManager;
-
+    public float masterVolume = 0.5f;
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("here");
 
-        UpdateVolume(0.1f);
+        //UpdateVolume(0.1f);
     }
 
     // Update is called once per frame
@@ -24,30 +24,33 @@ public class MasterAudioController : MonoBehaviour
         
     }
 
-    void UpdateVolume(float volume)
+    public void UpdateVolume(float volume)
     {
         Debug.Log("Here 2");
         
-        buttonAudioManager = FindObjectOfType<ButtonAudioManager>();
-        if (buttonAudioManager != null)
+        buttonAudioManager = GetComponent<ButtonAudioManager>();
+        
+        if (buttonAudioManager == null)
         {
+            
             int maxRetries = 10;
             int retryDelay = 1000;
             int retryCount = 0;
-
+  
             while (retryCount < maxRetries)
             {
+                
                 try
                 {
                     buttonAudioManager.UpdateVolume(volume);
-                    break;
+                    
                 }
                 catch
                 {
                     retryCount++;
                     if (retryCount < maxRetries)
                     {
-                        Thread.Sleep(retryDelay);
+                        
                     }
                     else
                     {
@@ -58,6 +61,7 @@ public class MasterAudioController : MonoBehaviour
 
             
         }
+        
         
     }
 }

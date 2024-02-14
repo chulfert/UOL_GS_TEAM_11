@@ -8,6 +8,7 @@ public class ButtonAudioManager : MonoBehaviour
 {
     public AudioClip clickSound;
     private AudioSource audioSource;
+    public MasterAudioController masterAudioController;
 
     void Start()
     {
@@ -31,6 +32,10 @@ public class ButtonAudioManager : MonoBehaviour
             
             // Audio Source properties
             audioSource.loop = true;
+
+            masterAudioController = FindObjectOfType<MasterAudioController>();
+            audioSource.volume = masterAudioController.masterVolume;
+            Debug.Log("Master volume: " + masterAudioController.masterVolume);
          
         }
     }
@@ -39,6 +44,7 @@ public class ButtonAudioManager : MonoBehaviour
     {
         // Play the click sound when a button is clicked
         audioSource.PlayOneShot(clickSound);
+        Debug.Log(audioSource.volume);
     }
 
     public void UpdateVolume(float volume)
@@ -55,5 +61,10 @@ public class ButtonAudioManager : MonoBehaviour
         throw new Exception("Sopmething went wrong");
 
         
+    }
+
+    public void MethodToCall()
+    {
+        Debug.Log("Method called from lower level script.");
     }
 }

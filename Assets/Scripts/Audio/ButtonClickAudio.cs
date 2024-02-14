@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class ButtonClickAudio : MonoBehaviour, IPointerClickHandler
 {
     public ButtonAudioManager buttonAudioManager;
+    public MasterAudioController masterAudioController;
 
     // Start is called before the first frame update
     void Start()
