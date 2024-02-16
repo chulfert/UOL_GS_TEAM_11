@@ -6,10 +6,10 @@ using UnityEngine;
 public class TrackController : MonoBehaviour
 {
 
-    float maxForce = 200f;
+    float maxForce = 10f;
     Collider playerCollider;
-    float minDistance = 5f;
-    float maxDistance = 30f;
+    float minDistance = 6f;
+    float maxDistance = 10f;
 
     // Start is called before the first frame update
     void Start()

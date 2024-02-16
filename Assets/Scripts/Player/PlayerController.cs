@@ -7,8 +7,9 @@ public class PlayerController : MonoBehaviour
     public float health = 50f;
 
     public float moveForce = 5f;
-    public float jumpForce = 13f;
-    public float maxSpeed = 10f;
+    public float jumpForce = 1f;
+    public float maxSpeed = 50f;
+    public float maxHeight = 5f;
 
     private Rigidbody rb;
     private float moveInput;
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
             moveInput = 1f;
         }
 
-        isJumping = Input.GetKeyDown(KeyCode.Space);
+        isJumping = Input.GetKey(KeyCode.Space);
 
         // Update currentForce for ramp up effect
         if (moveInput != 0)
@@ -52,17 +53,23 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(new Vector3(moveInput * currentForce, 0, 0), ForceMode.Force);
 
         // Apply jump force
-        if (isJumping ) // 
+        if(transform.position.y <= maxHeight)
         {
+            if (isJumping) 
+            {
             Debug.Log("Jumping");
-            rb.AddForce(Vector3.up * 30, ForceMode.Impulse);
+            rb.AddForce(Vector3.up, ForceMode.Impulse);
             isJumping = false;  
+            }
+
         }
 
+
         // Since autorunner, move forward
-        if(rb.velocity.z < maxSpeed)
+        if(rb.velocity.z <= maxSpeed)
         {
-            rb.AddForce(new Vector3(0, 0, 0.0f), ForceMode.Force);
+            rb.AddForce(new Vector3(0, 0, maxSpeed), ForceMode.Force);
         }
     }
+
 }
