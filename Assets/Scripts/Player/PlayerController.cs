@@ -6,10 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     public float health = 50f;
 
-    public float moveForce = 5f;
-    public float jumpForce = 1f;
+    public float moveForce = 10f;
+    public float jumpForce = 13f;
     public float maxSpeed = 50f;
-    public float maxHeight = 5f;
+    public float raycastDistance = 4f;
 
     private Rigidbody rb;
     private float moveInput;
@@ -34,7 +34,11 @@ public class PlayerController : MonoBehaviour
             moveInput = 1f;
         }
 
-        isJumping = Input.GetKey(KeyCode.Space);
+        if(Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        {
+            isJumping = true;
+        }
+
 
         // Update currentForce for ramp up effect
         if (moveInput != 0)
@@ -45,6 +49,15 @@ public class PlayerController : MonoBehaviour
         {
             currentForce = 0;
         }
+
+        Debug.DrawRay(transform.position, Vector3.down * raycastDistance, Color.red);
+
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, raycastDistance);
+
     }
 
     void FixedUpdate()
@@ -53,22 +66,17 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(new Vector3(moveInput * currentForce, 0, 0), ForceMode.Force);
 
         // Apply jump force
-        if(transform.position.y <= maxHeight)
+        if (IsGrounded() && isJumping) 
         {
-            if (isJumping) 
-            {
-            Debug.Log("Jumping");
-            rb.AddForce(Vector3.up, ForceMode.Impulse);
-            isJumping = false;  
-            }
-
+        Debug.Log("Jumping");
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        isJumping = false;  
         }
-
 
         // Since autorunner, move forward
         if(rb.velocity.z <= maxSpeed)
         {
-            rb.AddForce(new Vector3(0, 0, maxSpeed), ForceMode.Force);
+            rb.AddForce(new Vector3(0, 0, 1) * moveForce, ForceMode.Force);
         }
     }
 
