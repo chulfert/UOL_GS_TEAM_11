@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HealthCollectible : BaseCollectible
 {
+
+    public GameObject Collecting;
     
     protected override void Collect()
     {
@@ -11,6 +13,10 @@ public class HealthCollectible : BaseCollectible
         //find player and add 10 health
         player.GetComponent<PlayerController>().health += 10;
 
+        if(Collecting != null)
+        {
+            Instantiate(Collecting, transform.position, Quaternion.identity);
+        }
     }
 }   
 

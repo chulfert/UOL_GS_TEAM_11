@@ -5,6 +5,8 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     public float health = 100f;
+    public GameObject Explosion;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,13 @@ public class Obstacle : MonoBehaviour
         health -= 20f;
         if (health <= 0f)
         {
+            if(Explosion != null)
+            {
+                Instantiate(Explosion, transform.position, Quaternion.identity);
+                
+            }
             Destroy(gameObject);
+
         }
     }
 }
