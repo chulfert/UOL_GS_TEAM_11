@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float health = 50f;
-    public float fuel = 100f;
-
+    public float maxHealth = 50f;
+    public float maxFuel = 100f;
+    public float health;
+    public float fuel;
     public float moveForce = 10f;
     public float jumpForce = 13f;
     public float maxSpeed = 100f;
@@ -17,8 +18,14 @@ public class PlayerController : MonoBehaviour
     private bool isJumping = false;
     private float currentForce;
 
+    public HealthBar healthBar;
+    public FuelBar fuelBar;
     void Start()
     {
+        health = maxHealth;
+        fuel = maxFuel;
+        healthBar.SetMaxHP(maxHealth);
+        fuelBar.SetMaxFuel(maxFuel);
         Time.timeScale = 1;
         //Get the timer and start it
        
@@ -67,6 +74,7 @@ public class PlayerController : MonoBehaviour
         }
 
         fuel -= Time.deltaTime;
+        fuelBar.SetFuel(fuel);
         //Debug.DrawRay(transform.position, Vector3.down * raycastDistance, Color.red);
 
         if (fuel <= 0 || health <= 0 ||transform.position.y < 0)
@@ -116,6 +124,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Player died");
         }
+        healthBar.SetHP(health);
     }
 
 }

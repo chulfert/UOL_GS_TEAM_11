@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class HUDController : MonoBehaviour
+public class HealthBar : MonoBehaviour
 {
     public Slider HPbar;
     public void SetMaxHP(float HP)
