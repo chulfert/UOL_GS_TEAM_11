@@ -16,12 +16,20 @@ public class Obstacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.z < Camera.main.transform.position.z)
+        {
+            Destroy(gameObject);
+        }
+        if (transform.position.y < -10)
+        {
+            Destroy(gameObject);
+        }
         
     }
 
     public void TakeDamage()
     {
-        health -= 20f;
+        health -= 10f;
         if (health <= 0f)
         {
             if(Explosion != null)
@@ -31,6 +39,23 @@ public class Obstacle : MonoBehaviour
             }
             Destroy(gameObject);
 
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            other.GetComponent<PlayerController>().TakeDamage(30);
+            other.GetComponent<Rigidbody>().AddForce(Vector3.back * 20, ForceMode.Impulse);
+            TakeDamage();
+            if (Explosion != null)
+            {
+                Debug.Log("Explosion");
+                Instantiate(Explosion, transform.position, Quaternion.identity);
+
+            }
+            Destroy(gameObject);
         }
     }
 }

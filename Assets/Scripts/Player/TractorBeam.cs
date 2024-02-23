@@ -35,7 +35,6 @@ public class TractorBeam : MonoBehaviour
     {
         // Initial beam setup, if needed
         UpdateBeamPosition();
-        Debug.Log("Start attracting");
     }
 
     void UpdateBeamPosition()
@@ -47,7 +46,6 @@ public class TractorBeam : MonoBehaviour
         if (Physics.Raycast(ray, out hit, beamRange, collectibleLayer))
         {
             beamEnd = hit.point;
-
             // Check if the hit object is a collectible and start attracting it
             currentCollectible = hit.collider.GetComponent<BaseCollectible>();
             if (currentCollectible != null)
@@ -58,6 +56,7 @@ public class TractorBeam : MonoBehaviour
         else
         {
             beamEnd = ray.origin + ray.direction * beamRange;
+            currentCollectible = null;
         }
 
         beamVisuals.DisplayBeam(transform.position, beamEnd); // Update the visual representation of the beam

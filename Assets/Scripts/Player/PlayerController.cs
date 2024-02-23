@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float health = 50f;
+    public float fuel = 100f;
 
     public float moveForce = 10f;
     public float jumpForce = 13f;
-    public float maxSpeed = 50f;
+    public float maxSpeed = 100f;
     public float raycastDistance = 4f;
 
     private Rigidbody rb;
@@ -18,7 +19,22 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
+        //Get the timer and start it
+       
+        GameObject timer = GameObject.Find("Timer");
+        Component timerComponent = timer.GetComponent<Timer>();    
+        if(timerComponent == null)
+        {
+            Debug.LogError("Timer not found on player");
+        }
+        else
+            ((Timer)timerComponent).StartTimer();
         rb = GetComponent<Rigidbody>();
+        if(rb == null)
+        {
+            Debug.LogError("Rigidbody not found on player");
+        }
         currentForce = 0f;
     }
 
@@ -50,12 +66,25 @@ public class PlayerController : MonoBehaviour
             currentForce = 0;
         }
 
-        Debug.DrawRay(transform.position, Vector3.down * raycastDistance, Color.red);
+        fuel -= Time.deltaTime;
+        //Debug.DrawRay(transform.position, Vector3.down * raycastDistance, Color.red);
+
+        if (fuel <= 0 || health <= 0 ||transform.position.y < 0)
+        {
+            // Call the TriggerGameOver method from the GameOverController
+            FindObjectOfType<GameOverController>().TriggerGameOver();
+            GameObject.Find("Timer").GetComponent<Timer>().StopTimer();
+        }
+
+        // Find the camera, the attached canvas, the attached text 'HealthDisplay' and set the text to the health value
+        GameObject.Find("Main Camera").transform.Find("Canvas").transform.Find("HealthDisplay").GetComponent<UnityEngine.UI.Text>().text = "Health: " + health; 
+        GameObject.Find("Main Camera").transform.Find("Canvas").transform.Find("FuelDisplay").GetComponent<UnityEngine.UI.Text>().text = "Fuel: " + fuel;
 
     }
 
     private bool IsGrounded()
     {
+        // Watch out, casting every frame, works only if not rotated.
         return Physics.Raycast(transform.position, Vector3.down, raycastDistance);
 
     }
@@ -76,7 +105,16 @@ public class PlayerController : MonoBehaviour
         // Since autorunner, move forward
         if(rb.velocity.z <= maxSpeed)
         {
-            rb.AddForce(new Vector3(0, 0, 1) * moveForce, ForceMode.Force);
+            rb.AddForce(new Vector3(0, 0, 20), ForceMode.Force);
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Debug.Log("Player died");
         }
     }
 
