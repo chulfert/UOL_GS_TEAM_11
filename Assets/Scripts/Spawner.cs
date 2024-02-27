@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             float x = Random.Range(-10, 10);
-            float y = Random.Range(0, 10);
+            float y = Random.Range(3, 8);
             float z = i * 200 + Random.Range(-5,5);
             Instantiate(healthPickupPrefab, new Vector3(x,y,z), Quaternion.identity);
         }
@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             float x = Random.Range(-10, 10);
-            float y = Random.Range(0, 10);
+            float y = Random.Range(3, 8);
             float z = i * 200 + Random.Range(-3,3);
 
             float rotation = Random.Range(0, 360);
