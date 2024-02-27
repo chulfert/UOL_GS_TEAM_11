@@ -5,13 +5,15 @@ using UnityEngine;
 public class FuelPickup : BaseCollectible
 {
     public GameObject Collecting;
+
     protected override void Collect()
     {
         base.Collect();
-        //find player and add 10 fuel
-        player.GetComponent<PlayerController>().fuel += 30;
+        // Find player and add fuel, ensuring it does not exceed 100
+        PlayerController playerController = player.GetComponent<PlayerController>();
+        playerController.fuel = Mathf.Min(playerController.fuel + 30, 100);
 
-        if(Collecting != null)
+        if (Collecting != null)
         {
             Instantiate(Collecting, transform.position, Quaternion.identity);
         }
