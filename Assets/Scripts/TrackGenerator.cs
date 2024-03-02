@@ -3,8 +3,8 @@
 public class TrackGenerator : MonoBehaviour
 {
     public GameObject trackPiecePrefab;
-    public int segmentLength = 5; // Number of track pieces in a segment
-    public int numSegments = 10; // Total number of segments to generate
+    int segmentLength = 5; // Number of track pieces in a segment
+    public int numSegments = 0; // Total number of segments to generate
     [Range(0f, 1f)] public float missingPieceProbability = 0.2f; // Probability of a piece being missing
 
     void Start()
