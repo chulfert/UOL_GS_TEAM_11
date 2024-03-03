@@ -8,6 +8,7 @@ TagManager:
   - Collectible
   - Track
   - Audio
+  - Volume
   layers:
   - Default
   - TransparentFX

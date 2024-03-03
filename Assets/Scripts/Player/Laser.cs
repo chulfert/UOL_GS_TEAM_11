@@ -10,6 +10,7 @@ public class Laser : MonoBehaviour
     public LaserBeam laserBeam;
     AudioManager audioManager;
 
+
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
