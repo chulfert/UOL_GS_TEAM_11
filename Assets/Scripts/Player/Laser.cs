@@ -8,21 +8,11 @@ public class Laser : MonoBehaviour
     public float laserRange = 100f;
     public LayerMask obstacleLayer;
     public LaserBeam laserBeam;
-    AudioManager audioManager;
-    MasterVolumeController masterVolumeController;
-
-    private void Awake()
-    {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        masterVolumeController = GameObject.FindGameObjectWithTag("Volume").GetComponent<MasterVolumeController>();
-    }
-
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) // Left mouse click
         {
             StartShootingLaser();
-            audioManager.PlaySFX(audioManager.laserBeam, masterVolumeController.sfxVolume);
         }
         if (Input.GetMouseButton(0)) // Left mouse button held down
         {
@@ -31,7 +21,6 @@ public class Laser : MonoBehaviour
         if (Input.GetMouseButtonUp(0)) // Left mouse button released
         {
             laserBeam.StopLaser();
-            audioManager.StopSFX(audioManager.laserBeam);
         }
     }
 
