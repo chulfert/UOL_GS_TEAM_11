@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    AudioManager audioManager;
+
     public float maxHealth = 50f;
     public float maxFuel = 100f;
     public float health;
@@ -18,10 +20,18 @@ public class PlayerController : MonoBehaviour
     private bool isJumping = false;
     private float currentForce;
 
+
     public HealthBar healthBar;
     public FuelBar fuelBar;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     void Start()
     {
+        
         health = maxHealth;
         fuel = maxFuel;
         healthBar.SetMaxHP(maxHealth);
@@ -43,6 +53,10 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("Rigidbody not found on player");
         }
         currentForce = 0f;
+
+        // Audio
+   
+       
     }
 
     void Update()
@@ -60,6 +74,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             isJumping = true;
+            audioManager.PlaySFX(audioManager.jump, 1.0f);
         }
 
 
@@ -87,6 +102,10 @@ public class PlayerController : MonoBehaviour
         // Find the camera, the attached canvas, the attached text 'HealthDisplay' and set the text to the health value
         // GameObject.Find("Main Camera").transform.Find("Canvas").transform.Find("HealthDisplay").GetComponent<UnityEngine.UI.Text>().text = "Health: " + health; 
         // GameObject.Find("Main Camera").transform.Find("Canvas").transform.Find("FuelDisplay").GetComponent<UnityEngine.UI.Text>().text = "Fuel: " + fuel;
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            
+        }
 
     }
 
@@ -126,5 +145,7 @@ public class PlayerController : MonoBehaviour
         }
         healthBar.SetHP(health);
     }
+
+ 
 
 }

@@ -8,6 +8,12 @@ public class TractorBeam : MonoBehaviour
     public float beamRange = 100f;
     public LayerMask collectibleLayer; 
     public TractorBeamVisuals beamVisuals; 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     private BaseCollectible currentCollectible;
     void Update()
@@ -15,6 +21,8 @@ public class TractorBeam : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) // Right mouse click
         {
             StartAttracting();
+           
+            audioManager.PlaySFX(audioManager.tractorBeam, 0.1f);
         }
         if (Input.GetMouseButton(1)) // Right mouse button held down
         {
@@ -28,6 +36,7 @@ public class TractorBeam : MonoBehaviour
                 currentCollectible.StopAttracting();
                 currentCollectible = null;
             }
+            audioManager.StopSFX(audioManager.tractorBeam);
         }
     }
 
