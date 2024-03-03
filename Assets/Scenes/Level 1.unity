@@ -23830,12 +23830,15 @@ MonoBehaviour:
   backgroundMusicSource: {fileID: 13741033}
   playerHoverSource: {fileID: 387594666}
   SFXSource: {fileID: 877693484}
-  backgroundMusic: {fileID: 8300000, guid: db98c954f573aa44194183088260a3bf, type: 3}
+  backgroundMusic: {fileID: 8300000, guid: a32823d96078131449603c2d535ca241, type: 3}
   playerHover: {fileID: 8300000, guid: 38f2e33fbe5f03a4a851b7e3f1b571e5, type: 3}
   jump: {fileID: 8300000, guid: a0befc26fe2e30b43b014a11ecf1d9fb, type: 3}
   hover: {fileID: 8300000, guid: 38f2e33fbe5f03a4a851b7e3f1b571e5, type: 3}
   laserBeam: {fileID: 8300000, guid: 60d3b3c2dd0117045980c08a2f8af3b3, type: 3}
   tractorBeam: {fileID: 8300000, guid: fdcea5c64e7b2bd45851ccbf3ae30b16, type: 3}
+  collectHealth: {fileID: 8300000, guid: 0addfab3e6fdcb944852fe5e5ca8de47, type: 3}
+  collectFuel: {fileID: 8300000, guid: 34af042ec4f8a7842be203a008cf6f70, type: 3}
+  lowFuel: {fileID: 8300000, guid: afbfb13b3ac04ee43a2e42a5401490b4, type: 3}
 --- !u!4 &1014256177
 Transform:
   m_ObjectHideFlags: 0

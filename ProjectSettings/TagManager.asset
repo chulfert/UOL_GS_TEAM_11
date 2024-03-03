@@ -9,6 +9,8 @@ TagManager:
   - Track
   - Audio
   - Volume
+  - MusicVolumeLevel
+  - SFXVolumeLevel
   layers:
   - Default
   - TransparentFX

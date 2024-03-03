@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    MasterVolumeController masterVolumeController;
+
     [Header("--- Audio Source ---")]
     [SerializeField] AudioSource backgroundMusicSource;
     [SerializeField] AudioSource playerHoverSource;
@@ -16,11 +18,20 @@ public class AudioManager : MonoBehaviour
     public AudioClip hover;
     public AudioClip laserBeam;
     public AudioClip tractorBeam;
+    public AudioClip collectHealth;
+    public AudioClip collectFuel;
+    public AudioClip lowFuel;
+
+    private void Awake()
+    {
+        masterVolumeController = GameObject.FindGameObjectWithTag("Volume").GetComponent<MasterVolumeController>();
+    }
 
     private void Start()
     {
-        // backgroundMusicSource.clip = backgroundMusic;
-        // backgroundMusicSource.Play();
+        backgroundMusicSource.clip = backgroundMusic;
+        backgroundMusicSource.volume = masterVolumeController.musicVolume * 0.8f;
+        backgroundMusicSource.Play();
 
         playerHoverSource.clip = playerHover;
         playerHoverSource.loop = true;

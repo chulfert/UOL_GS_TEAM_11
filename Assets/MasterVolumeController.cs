@@ -1,38 +1,59 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MasterVolumeController : MonoBehaviour
 {
-    public float masterVolume;
-    public Slider slider;
+    private static MasterVolumeController instance;
+    public float musicVolume;
+    public float sfxVolume;
+  
+    public Slider musicSlider;
+    public Slider sfxSlider;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
-        // Subscribe to the OnValueChanged event of the slider
-        masterVolume = 1.0f;
-        slider.onValueChanged.AddListener(OnSliderValueChanged);
+        musicVolume = 1.0f;
+        sfxVolume = 1.0f;
+        musicSlider.onValueChanged.AddListener(OnMusicValueChanged);
+        sfxSlider.onValueChanged.AddListener(OnSFXValueChanged);
     }
 
-    // This method will be called whenever the slider value changes
-    private void OnSliderValueChanged(float value)
+    private void OnMusicValueChanged(float value)
     {
-        // Do whatever you want with the slider value here
-        masterVolume = value;
-        AudioListener.volume = masterVolume;
-        Debug.Log("Slider Value: " + masterVolume + AudioListener.volume);
+        musicVolume = value;
+        Debug.Log("Music Volume: " + musicVolume);
     }
 
-    // Remember to unsubscribe from the event when the script is disabled or destroyed
+    private void OnSFXValueChanged(float value)
+    {
+        sfxVolume = value;
+        Debug.Log("SFX Volume: " + sfxVolume);
+    }
+
     private void OnDestroy()
     {
-        slider.onValueChanged.RemoveListener(OnSliderValueChanged);
+        musicSlider.onValueChanged.RemoveListener(OnMusicValueChanged);
+        sfxSlider.onValueChanged.RemoveListener(OnSFXValueChanged);
     }
-
 
     public void setMasterVolume(float volume)
     {
-        masterVolume = volume;
+        musicVolume = volume;
     }
 }

@@ -9,11 +9,12 @@ public class Laser : MonoBehaviour
     public LayerMask obstacleLayer;
     public LaserBeam laserBeam;
     AudioManager audioManager;
-
+    MasterVolumeController masterVolumeController;
 
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        masterVolumeController = GameObject.FindGameObjectWithTag("Volume").GetComponent<MasterVolumeController>();
     }
 
     void Update()
@@ -21,7 +22,7 @@ public class Laser : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) // Left mouse click
         {
             StartShootingLaser();
-            audioManager.PlaySFX(audioManager.laserBeam, 1.0f);
+            audioManager.PlaySFX(audioManager.laserBeam, masterVolumeController.sfxVolume);
         }
         if (Input.GetMouseButton(0)) // Left mouse button held down
         {
