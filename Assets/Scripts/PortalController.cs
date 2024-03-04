@@ -12,10 +12,19 @@ public class PortalController : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-
-            GameObject.Find("Timer").GetComponent<Timer>().StopTimerAndSaveHighscore();
-            //Close the scene and load level 2
-            SceneManager.LoadScene("Level2");
+            // if current scene is level 1
+            if(SceneManager.GetActiveScene().name == "Level1")
+            {
+                // Stop the timer and save the highscore
+                GameObject.Find("Timer").GetComponent<Timer>().StopTimerAndSaveHighscore();
+                // Close the scene and load level 2
+                SceneManager.LoadScene("Level2");
+            }
+            else
+            {
+                // goto main menu
+                SceneManager.LoadScene("MainMenu");
+            }
         }
     }
 }

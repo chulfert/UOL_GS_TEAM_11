@@ -5,7 +5,7 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     public Camera playerCamera;
-    public float laserRange = 100f;
+    public float laserRange = 300f;
     public LayerMask obstacleLayer;
     public LaserBeam laserBeam;
     void Update()
@@ -52,6 +52,7 @@ public class Laser : MonoBehaviour
             laserEnd = ray.origin + ray.direction * laserRange;
         }
 
-        laserBeam.ShootLaser(transform.position, laserEnd);
+        Vector3 laserPosition = transform.position + Vector3.left * 1f;
+        laserBeam.ShootLaser(laserPosition, laserEnd);
     }
 }
