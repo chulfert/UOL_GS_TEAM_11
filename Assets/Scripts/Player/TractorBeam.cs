@@ -59,7 +59,9 @@ public class TractorBeam : MonoBehaviour
             currentCollectible = null;
         }
 
-        beamVisuals.DisplayBeam(transform.position, beamEnd); // Update the visual representation of the beam
+        Vector3 beamPosition = transform.position + Vector3.right * 1f;
+
+        beamVisuals.DisplayBeam(beamPosition, beamEnd); // Update the visual representation of the beam
     }
 }
 
