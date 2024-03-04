@@ -6549,9 +6549,9 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.8301887, g: 0.28586686, b: 0.28586686, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0.44313726, g: 0, b: 0, a: 1}
+      key1: {r: 0.46666667, g: 0.06666667, b: 0, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -6567,7 +6567,7 @@ LineRenderer:
       ctime7: 0
       atime0: 0
       atime1: 65535
-      atime2: 0
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -17628,8 +17628,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.15707919, g: 0.13866144, b: 0.7169812, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.101960786, g: 0.77254903, b: 0.6901961, a: 1}
+      key1: {r: 0.101960786, g: 0.77254903, b: 0.6901961, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -20594,13 +20594,14 @@ GameObject:
   - component: {fileID: 872186684}
   - component: {fileID: 872186683}
   - component: {fileID: 872186682}
+  - component: {fileID: 872186685}
   m_Layer: 5
   m_Name: Game Over Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &872186681
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20681,6 +20682,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &872186685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872186680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41921412a2d815d4892a917274d45a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverPanel: {fileID: 872186680}
 --- !u!1001 &892554658
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23202,45 +23216,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1677344573}
     m_Modifications:
-    - target: {fileID: 608023830, guid: 1cf6955fd17434e449d4b184dce04d2c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 608023833, guid: 1cf6955fd17434e449d4b184dce04d2c, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1677344572}
     - target: {fileID: 7701963310800213629, guid: 1cf6955fd17434e449d4b184dce04d2c,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8525835984748184930, guid: 1cf6955fd17434e449d4b184dce04d2c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8525835984748184935, guid: 1cf6955fd17434e449d4b184dce04d2c,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1677344572}
-    - target: {fileID: 8525835984870968106, guid: 1cf6955fd17434e449d4b184dce04d2c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8525835984870968111, guid: 1cf6955fd17434e449d4b184dce04d2c,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1677344572}
-    - target: {fileID: 8525835985831556373, guid: 1cf6955fd17434e449d4b184dce04d2c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8525835985831556374, guid: 1cf6955fd17434e449d4b184dce04d2c,
         type: 3}
       propertyPath: m_Camera
       value: 

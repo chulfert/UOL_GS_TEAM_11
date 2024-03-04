@@ -8,8 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Explosion
-  m_Shader: {fileID: 4800000, guid: 8516d7a69675844a7a0b7095af7c46af, type: 3}
-  m_ShaderKeywords: _FADING_ON _FLIPBOOKBLENDING_ON _SOFTPARTICLES_ON _SPECULAR_COLOR
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_ShaderKeywords: _FADING_ON _FLIPBOOKBLENDING_ON _SOFTPARTICLES_ON _SPECULARHIGHLIGHTS_OFF
+    _SPECULAR_COLOR
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
