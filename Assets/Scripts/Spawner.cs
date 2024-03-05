@@ -40,9 +40,9 @@ public class Spawner : MonoBehaviour
             //scale obstacles to random size
             obj.transform.localScale = new Vector3(Random.Range(1,3), Random.Range(1,3), Random.Range(1,3));
             //impart rotational force to the obstacle
-            obj.GetComponent<Rigidbody>().AddTorque(Random.Range(-10,10),Random.Range(-10,10),Random.Range(-10,10), ForceMode.Impulse);
+            obj.GetComponent<Rigidbody>().AddTorque(Random.Range(-8,8),Random.Range(-8,8),Random.Range(-8,8), ForceMode.Impulse);
 
-            obj.GetComponent<Rigidbody>().AddForce(Random.Range(-20, 20), Random.Range(-10, 0), Random.Range(-20, 20), ForceMode.Impulse);
+            obj.GetComponent<Rigidbody>().AddForce(Random.Range(-15, 15), Random.Range(-5, 0), Random.Range(-15, 15), ForceMode.Impulse);
         }
 
         // Spawn building represented by cubes alongside the track
