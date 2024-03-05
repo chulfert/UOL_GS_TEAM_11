@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
-using TMPro; // Include the TextMeshPro namespace
+using TMPro;
 
 public class InGameInstructions : MonoBehaviour
 {
-    public string[] instructions; // Array to hold the instructions
-    public float displayTime = 6f; // Time in seconds each instruction is fully visible
-    public float fadeDuration = 2f; // Duration of the fade-out effect
-    public TextMeshProUGUI textComponent; // Assign this in the inspector
+    public string[] instructions; // Array for instructions
+    public float displayTime = 6f; // Time in seconds
+    public float fadeDuration = 2f; // Duration of fade-out 
+    public TextMeshProUGUI textComponent; 
 
     void Start()
     {
@@ -24,8 +24,8 @@ public class InGameInstructions : MonoBehaviour
     {
         foreach (var instruction in instructions)
         {
-            textComponent.text = instruction; // Set the current instruction text
-            textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 0.549f); // Make sure it's fully visible
+            textComponent.text = instruction; // Current instruction
+            textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 0.549f); 
 
             yield return new WaitForSeconds(displayTime); // Wait for the display time
 
@@ -39,10 +39,10 @@ public class InGameInstructions : MonoBehaviour
                 yield return null;
             }
 
-            // Ensure the text is fully transparent before moving to the next instruction
+            // Ensure it is fully transparent 
             textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 0);
         }
 
-        gameObject.SetActive(false); // Optionally hide or disable the game object after all instructions have been shown
+        gameObject.SetActive(false); // Hide object
     }
 }
