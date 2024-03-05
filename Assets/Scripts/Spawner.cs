@@ -7,6 +7,10 @@ public class Spawner : MonoBehaviour
     public GameObject healthPickupPrefab;
     public GameObject fuelPickupPrefab;
     public GameObject obstaclePrefab;
+
+    public Material buildingMat;
+    public Material emissiveMat;
+    public Light pointLightPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +21,9 @@ public class Spawner : MonoBehaviour
             float y = Random.Range(3, 8);
             float z = i * 200 + Random.Range(-5,5);
             Instantiate(healthPickupPrefab, new Vector3(x,y,z), Quaternion.identity);
+            Light pointLight = Instantiate(pointLightPrefab, new Vector3(x, y, z), Quaternion.identity);
+            pointLight.color = Color.green;
+            pointLight.intensity = 5;
         }
 
         // INstntiate Fuel Pickup Prefabs along the Track
@@ -28,6 +35,11 @@ public class Spawner : MonoBehaviour
 
             float rotation = Random.Range(0, 360);
             Instantiate(fuelPickupPrefab, new Vector3(x,y,z), Quaternion.Euler(0,rotation,0));
+            // Attach a blue point light to the fuel pickup
+            Light pointLight = Instantiate(pointLightPrefab, new Vector3(x,y,z), Quaternion.identity);
+            pointLight.color = Color.blue;
+            pointLight.intensity = 5;
+
         }
 
         // INstntiate Obstacle Prefabs along the Track
@@ -48,16 +60,80 @@ public class Spawner : MonoBehaviour
         // Spawn building represented by cubes alongside the track
         for (int i = 0; i < 500; i++)
         {
-            float x = Random.Range(-50, -30);
-            if(i % 2 == 0)
+            float x = Random.Range(-60, -40);
+            if (i % 2 == 0) x *= -1;
+            float y = 0; // Ground level adjustment
+            float z = i * 4 + Random.Range(-3, 3);
+
+            // Main building
+            GameObject buildingBase = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            buildingBase.transform.position = new Vector3(x, y, z);
+            buildingBase.transform.localScale = new Vector3(Random.Range(25, 40), Random.Range(40, 200), Random.Range(25, 60));
+            buildingBase.GetComponent<Renderer>().material = buildingMat;
+
+            // Add a simple detail to the building
+            GameObject buildingDetail = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            buildingDetail.transform.parent = buildingBase.transform;
+            buildingDetail.transform.localPosition = new Vector3(0, 1.1f, 0); // Position on top of the base
+            buildingDetail.transform.localScale = new Vector3(0.5f, Random.Range(0.2f, 0.6f), 0.5f); // Smaller cube as a detail
+            buildingDetail.GetComponent<Renderer>().material = buildingMat;
+
+            if (Random.Range(0, 100) < 20)
             {
-                x *= -1;
+                Material neonMaterial = new Material(emissiveMat);
+                neonMaterial.SetColor("_EmissionColor", new Color(Random.Range(0.5f, 1), Random.Range(0.5f, 1), Random.Range(0.5f, 1)));
+                GameObject billboard = GameObject.CreatePrimitive(PrimitiveType.Quad);
+                if (i % 2 == 0)
+                {
+                    billboard.transform.Rotate(0, -90, 0);
+                    billboard.transform.position = new Vector3(-20, y + Random.Range(-10, 30), z);
+                }
+                else { 
+                    billboard.transform.Rotate(0, 90, 0);
+                    billboard.transform.position = new Vector3(20, y + Random.Range(-10, 30), z);
+                }
+                //rotate 90 degress to be parrallel to the z axis
+                billboard.transform.localScale = new Vector3(10, 10, 10);
+                billboard.GetComponent<Renderer>().material = neonMaterial;
+
+
+
+                // Decorate the buidling with point ligths of the same color
+                Light pointLight;
+                if (i % 2 == 0)
+                {
+                    Vector3 pos = billboard.transform.position;
+                    pos.x += 1;
+                    pointLight = Instantiate(pointLightPrefab, pos, Quaternion.identity);
+                    //angle towards the track if sspot
+                    //pointLight.transform.LookAt(new Vector3(0, 0, z));
+                   
+                }
+                else
+                {
+                    Vector3 pos = billboard.transform.position;
+                    pos.x -=1   ;
+                    pointLight = Instantiate(pointLightPrefab, pos, Quaternion.identity);
+                    //angle towards the track
+                   // pointLight.transform.LookAt(new Vector3(0, 0, z));
+
+                }
+                pointLight.color = neonMaterial.GetColor("_EmissionColor");
+                pointLight.intensity = Random.Range(55, 100);
+                pointLight.range = 250;
+                
+
             }
-            float y = -20;
-            float z = i * 50 + Random.Range(-3,3);
-            GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            obj.transform.position = new Vector3(x,y,z);
-            obj.transform.localScale = new Vector3(Random.Range(10,40), Random.Range(150, 440), Random.Range(10, 40));
+            
+            //spawn thick fog
+
+
+
+           
+             
+
+            
+
         }
     }   
     

@@ -13,7 +13,7 @@ public class PortalController : MonoBehaviour
         if(other.tag == "Player")
         {
             // if current scene is level 1
-            if(SceneManager.GetActiveScene().name == "Level1")
+            if(SceneManager.GetActiveScene().name == "Level 1")
             {
                 // Stop the timer and save the highscore
                 GameObject.Find("Timer").GetComponent<Timer>().StopTimerAndSaveHighscore();
@@ -23,7 +23,7 @@ public class PortalController : MonoBehaviour
             else
             {
                 // goto main menu
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene("Level2");
             }
         }
     }
