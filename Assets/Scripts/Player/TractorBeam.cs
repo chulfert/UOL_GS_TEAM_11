@@ -8,14 +8,6 @@ public class TractorBeam : MonoBehaviour
     public float beamRange = 100f;
     public LayerMask collectibleLayer; 
     public TractorBeamVisuals beamVisuals; 
-    AudioManager audioManager;
-    MasterVolumeController masterVolumeController;
-
-    private void Awake()
-    {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        masterVolumeController = GameObject.FindGameObjectWithTag("Volume").GetComponent<MasterVolumeController>();
-    }
 
     private BaseCollectible currentCollectible;
     void Update()
@@ -23,8 +15,6 @@ public class TractorBeam : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) // Right mouse click
         {
             StartAttracting();
-           
-            audioManager.PlaySFX(audioManager.tractorBeam, masterVolumeController.sfxVolume * 0.2f);
         }
         if (Input.GetMouseButton(1)) // Right mouse button held down
         {
@@ -38,7 +28,6 @@ public class TractorBeam : MonoBehaviour
                 currentCollectible.StopAttracting();
                 currentCollectible = null;
             }
-            audioManager.StopSFX(audioManager.tractorBeam);
         }
     }
 
@@ -70,7 +59,9 @@ public class TractorBeam : MonoBehaviour
             currentCollectible = null;
         }
 
-        beamVisuals.DisplayBeam(transform.position, beamEnd); // Update the visual representation of the beam
+        Vector3 beamPosition = transform.position + Vector3.right * 1f;
+
+        beamVisuals.DisplayBeam(beamPosition, beamEnd); // Update the visual representation of the beam
     }
 }
 

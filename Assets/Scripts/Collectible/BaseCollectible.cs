@@ -6,15 +6,6 @@ public class BaseCollectible : MonoBehaviour
 {
     protected bool isAttracted = false;
     protected GameObject player;
-    AudioManager audioManager;
-    MasterVolumeController masterVolumeController;
-
-    
-    private void Awake()
-    {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        masterVolumeController = GameObject.FindGameObjectWithTag("Volume").GetComponent<MasterVolumeController>();
-    }
 
     public virtual void StartAttracting(GameObject playerObject)
     {
@@ -43,8 +34,6 @@ public class BaseCollectible : MonoBehaviour
         if (other.gameObject == player)
         {
             Collect();
-            audioManager.StopSFX(audioManager.tractorBeam);
-            audioManager.PlaySFX(audioManager.collectFuel, masterVolumeController.sfxVolume);
         }
     }
 

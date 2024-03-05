@@ -5,24 +5,14 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     public Camera playerCamera;
-    public float laserRange = 100f;
+    public float laserRange = 300f;
     public LayerMask obstacleLayer;
     public LaserBeam laserBeam;
-    AudioManager audioManager;
-    MasterVolumeController masterVolumeController;
-
-    private void Awake()
-    {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        masterVolumeController = GameObject.FindGameObjectWithTag("Volume").GetComponent<MasterVolumeController>();
-    }
-
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) // Left mouse click
         {
             StartShootingLaser();
-            audioManager.PlaySFX(audioManager.laserBeam, masterVolumeController.sfxVolume);
         }
         if (Input.GetMouseButton(0)) // Left mouse button held down
         {
@@ -31,7 +21,6 @@ public class Laser : MonoBehaviour
         if (Input.GetMouseButtonUp(0)) // Left mouse button released
         {
             laserBeam.StopLaser();
-            audioManager.StopSFX(audioManager.laserBeam);
         }
     }
 
@@ -63,6 +52,7 @@ public class Laser : MonoBehaviour
             laserEnd = ray.origin + ray.direction * laserRange;
         }
 
-        laserBeam.ShootLaser(transform.position, laserEnd);
+        Vector3 laserPosition = transform.position + Vector3.left * 1f;
+        laserBeam.ShootLaser(laserPosition, laserEnd);
     }
 }
