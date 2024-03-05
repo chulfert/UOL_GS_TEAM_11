@@ -7,6 +7,10 @@ TagManager:
   - Obstacle
   - Collectible
   - Track
+  - Audio
+  - Volume
+  - MusicVolumeLevel
+  - SFXVolumeLevel
   layers:
   - Default
   - TransparentFX
