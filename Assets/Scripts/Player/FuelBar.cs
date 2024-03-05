@@ -12,6 +12,10 @@ public class FuelBar : MonoBehaviour
     }
     public void SetFuel(float Fuel)
     {
+      if (Fuelbar.value == 0.3 * Fuelbar.maxValue) 
+        {
+            audioManager.PlaySFX(audioManager.lowFuel, masterVolumeController.sfxVolume * 0.1f);
+        }
         Fuelbar.value = Fuel;
     }
 }
