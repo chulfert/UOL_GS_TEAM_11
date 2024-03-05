@@ -4,38 +4,45 @@ using TMPro; // Include the TextMeshPro namespace
 
 public class InGameInstructions : MonoBehaviour
 {
-    public float delayBeforeFade = 12f; // Time in seconds before starting the fade-out effect
+    public string[] instructions; // Array to hold the instructions
+    public float displayTime = 6f; // Time in seconds each instruction is fully visible
     public float fadeDuration = 2f; // Duration of the fade-out effect
+    public TextMeshProUGUI textComponent; // Assign this in the inspector
 
     void Start()
     {
-        StartCoroutine(FadeOutAfterDelay());
-    }
-
-    IEnumerator FadeOutAfterDelay()
-    {
-        yield return new WaitForSeconds(delayBeforeFade);
-
-        float currentTime = 0;
-        TextMeshProUGUI textComponent = GetComponent<TextMeshProUGUI>(); // Use TextMeshProUGUI for UI text, or TextMeshPro for 3D text
-
         if (textComponent == null)
         {
-            Debug.LogError("TextMeshPro component not found on the object.", this);
-            yield break; // Exit the coroutine if the TextMeshPro component is not found
+            Debug.LogError("TextMeshProUGUI component not assigned.", this);
+            return;
         }
+        
+        StartCoroutine(DisplayInstructionsSequence());
+    }
 
-        Color originalColor = textComponent.color;
-
-        while (currentTime < fadeDuration)
+    IEnumerator DisplayInstructionsSequence()
+    {
+        foreach (var instruction in instructions)
         {
-            float alpha = Mathf.Lerp(0.549f, 0f, currentTime / fadeDuration);
-            textComponent.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
-            currentTime += Time.deltaTime;
-            yield return null;
+            textComponent.text = instruction; // Set the current instruction text
+            textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 0.549f); // Make sure it's fully visible
+
+            yield return new WaitForSeconds(displayTime); // Wait for the display time
+
+            // Start fade out
+            float currentTime = 0;
+            while (currentTime < fadeDuration)
+            {
+                float alpha = Mathf.Lerp(0.549f, 0f, currentTime / fadeDuration);
+                textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, alpha);
+                currentTime += Time.deltaTime;
+                yield return null;
+            }
+
+            // Ensure the text is fully transparent before moving to the next instruction
+            textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 0);
         }
 
-        textComponent.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0);
-        gameObject.SetActive(false);
+        gameObject.SetActive(false); // Optionally hide or disable the game object after all instructions have been shown
     }
 }
