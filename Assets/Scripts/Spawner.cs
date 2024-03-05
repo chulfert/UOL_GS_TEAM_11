@@ -21,6 +21,9 @@ public class Spawner : MonoBehaviour
             float y = Random.Range(3, 8);
             float z = i * 200 + Random.Range(-5,5);
             Instantiate(healthPickupPrefab, new Vector3(x,y,z), Quaternion.identity);
+            Light pointLight = Instantiate(pointLightPrefab, new Vector3(x, y, z), Quaternion.identity);
+            pointLight.color = Color.green;
+            pointLight.intensity = 5;
         }
 
         // INstntiate Fuel Pickup Prefabs along the Track
@@ -32,6 +35,11 @@ public class Spawner : MonoBehaviour
 
             float rotation = Random.Range(0, 360);
             Instantiate(fuelPickupPrefab, new Vector3(x,y,z), Quaternion.Euler(0,rotation,0));
+            // Attach a blue point light to the fuel pickup
+            Light pointLight = Instantiate(pointLightPrefab, new Vector3(x,y,z), Quaternion.identity);
+            pointLight.color = Color.blue;
+            pointLight.intensity = 5;
+
         }
 
         // INstntiate Obstacle Prefabs along the Track
