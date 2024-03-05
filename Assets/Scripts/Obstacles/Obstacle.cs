@@ -38,7 +38,7 @@ public class Obstacle : MonoBehaviour
                 Instantiate(Explosion, transform.position, Quaternion.identity);
                 
             }
-            Destroy(gameObject, 0.5f);
+            Destroy(gameObject);
 
         }
     }
@@ -56,7 +56,7 @@ public class Obstacle : MonoBehaviour
                 Instantiate(Explosion, transform.position, Quaternion.identity);
 
             }
-            Destroy(gameObject);
+            Destroy(gameObject, 0.5f);
         }
     }
 }
