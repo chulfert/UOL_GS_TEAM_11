@@ -6,7 +6,6 @@ public class HealthCollectible : BaseCollectible
 {
 
     public GameObject Collecting;
-
     
     protected override void Collect()
     {
@@ -17,7 +16,7 @@ public class HealthCollectible : BaseCollectible
         if(player.GetComponent<PlayerController>().health < 50)
         {
             player.GetComponent<PlayerController>().health += 10;
-          
+
             // Update the health bar
             playerController.healthBar.SetHP(playerController.health);
         }
