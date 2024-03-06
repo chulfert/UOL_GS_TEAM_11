@@ -18,7 +18,7 @@ public class Timer : MonoBehaviour
         {
             currentTime = Time.time - startTime;
             // Optionally, display the current time in the UI
-            TimerText.text = "Time: " + currentTime.ToString("F2");
+            TimerText.text = currentTime.ToString("F2");
             
         }
     }
