@@ -6,7 +6,7 @@ public class InGameInstructions : MonoBehaviour
 {
     public string[] instructions; // Array for instructions
     public float displayTime = 6f; // Time in seconds
-    public float fadeDuration = 1f; // Duration of fade-out 
+    public float fadeDuration = 2f; // Duration of fade-out 
     public TextMeshProUGUI textComponent; 
 
     void Start()
@@ -25,7 +25,7 @@ public class InGameInstructions : MonoBehaviour
         foreach (var instruction in instructions)
         {
             textComponent.text = instruction; // Current instruction
-            textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 1f); 
+            textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 0.549f); 
 
             yield return new WaitForSeconds(displayTime); // Wait for the display time
 
@@ -33,7 +33,7 @@ public class InGameInstructions : MonoBehaviour
             float currentTime = 0;
             while (currentTime < fadeDuration)
             {
-                float alpha = Mathf.Lerp(1f, 0f, currentTime / fadeDuration);
+                float alpha = Mathf.Lerp(0.549f, 0f, currentTime / fadeDuration);
                 textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, alpha);
                 currentTime += Time.deltaTime;
                 yield return null;
@@ -43,6 +43,6 @@ public class InGameInstructions : MonoBehaviour
             textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 0);
         }
 
-        gameObject.SetActive(false); // Hide canvas
+        gameObject.SetActive(false); // Hide object
     }
 }
