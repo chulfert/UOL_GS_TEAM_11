@@ -7,6 +7,8 @@ TagManager:
   - Obstacle
   - Collectible
   - Track
+  - Audio
+  - Volume
   layers:
   - Default
   - TransparentFX
