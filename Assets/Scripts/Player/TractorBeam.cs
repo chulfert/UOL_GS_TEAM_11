@@ -26,7 +26,7 @@ public class TractorBeam : MonoBehaviour
             if (currentCollectible != null)
             {
                 currentCollectible.StopAttracting();
-                currentCollectible = null;
+                   currentCollectible = null;
             }
         }
     }
@@ -47,7 +47,10 @@ public class TractorBeam : MonoBehaviour
         {
             beamEnd = hit.point;
             // Check if the hit object is a collectible and start attracting it
-            currentCollectible = hit.collider.GetComponent<BaseCollectible>();
+            if (currentCollectible == null)
+            {
+                currentCollectible = hit.collider.GetComponent<BaseCollectible>();
+            }
             if (currentCollectible != null)
             {
                 currentCollectible.StartAttracting(gameObject); // Start attracting the collectible

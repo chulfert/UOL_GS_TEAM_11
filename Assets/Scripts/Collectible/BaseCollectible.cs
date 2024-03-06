@@ -26,6 +26,7 @@ public class BaseCollectible : MonoBehaviour
             float step = 15f * Time.deltaTime; // Adjust speed as needed
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
         }
+        
     }
 
     protected virtual void OnTriggerEnter(Collider other)
