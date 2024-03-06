@@ -31,7 +31,7 @@ public class HighScoreController : MonoBehaviour
             newHighScore.transform.SetParent(HighScorePanel.transform);
             newHighScore.AddComponent<Text>().text = (i + 1) + ". " + highScores[i].ToString("F2") + "s";
             // Set the text object's position and size
-            newHighScore.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -i * 30);
+            newHighScore.GetComponent<RectTransform>().anchoredPosition = new Vector2(60, 120 -i * 30);
             newHighScore.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 30);
             // Set the text object's font and color´and size
             newHighScore.GetComponent<Text>().font = Resources.GetBuiltinResource<Font>("Arial.ttf");

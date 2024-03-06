@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
         fuelBar.SetFuel(fuel);
         //Debug.DrawRay(transform.position, Vector3.down * raycastDistance, Color.red);
 
-        if (fuel <= 0 || health <= 0 ||transform.position.y < 0)
+        if (fuel <= 0 || health <= 0 || transform.position.y < -1.0f)
         {
             // Call the TriggerGameOver method from the GameOverController
             FindObjectOfType<GameOverController>().TriggerGameOver();
