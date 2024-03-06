@@ -38,4 +38,5 @@ public class GameOverController : MonoBehaviour
         // Quit the game
         SceneManager.LoadScene("MainMenu");
     }
+    
 }
