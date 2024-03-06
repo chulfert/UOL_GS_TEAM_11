@@ -35,12 +35,10 @@ public class Obstacle : MonoBehaviour
             if(Explosion != null)
             {
                 Debug.Log("Exploded");
-                Debug.Log($"Instantiating explosion at position: {transform.position}");
-                Debug.Log($"Camera position: {Camera.main.transform.position}");
                 Instantiate(Explosion, transform.position, Quaternion.identity);
                 
             }
-            Destroy(gameObject, 0.5f);
+            Destroy(gameObject);
 
         }
     }
@@ -58,7 +56,7 @@ public class Obstacle : MonoBehaviour
                 Instantiate(Explosion, transform.position, Quaternion.identity);
 
             }
-            Destroy(gameObject);
+            Destroy(gameObject, 0.5f);
         }
     }
 }
