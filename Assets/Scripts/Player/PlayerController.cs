@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    AudioManager audioManager;
+    MasterVolumeController masterVolumeController;
+
     public float maxHealth = 50f;
     public float maxFuel = 100f;
     public float health;
@@ -20,6 +23,13 @@ public class PlayerController : MonoBehaviour
 
     public HealthBar healthBar;
     public FuelBar fuelBar;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        masterVolumeController = GameObject.FindGameObjectWithTag("Volume").GetComponent<MasterVolumeController>();
+    }
+
     void Start()
     {
         health = maxHealth;
@@ -60,6 +70,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             isJumping = true;
+            audioManager.PlaySFX(audioManager.jump, masterVolumeController.sfxVolume);
         }
 
 
