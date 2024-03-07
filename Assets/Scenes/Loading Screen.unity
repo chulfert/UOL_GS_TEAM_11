@@ -473,7 +473,7 @@ MonoBehaviour:
       believes he''s part of the organisation now. Drake is determined to reach safety
       to clear his name and uncover the truth behind the setup. '
     initialDelay: 1
-    displayTime: 1
+    displayTime: 15
     fadeDuration: 1
   - text: Incoming call...
     initialDelay: 0
@@ -501,7 +501,7 @@ MonoBehaviour:
     fadeDuration: 1
   - text: Call ended... Run!
     initialDelay: 0
-    displayTime: 3
+    displayTime: 2
     fadeDuration: 1
   textComponent: {fileID: 1361902598}
 --- !u!1 &1292450823
