@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     public HealthBar healthBar;
     public FuelBar fuelBar;
 
+    private float currentTime;
+    private float timeSinceLastMove;
+
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -53,6 +56,9 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("Rigidbody not found on player");
         }
         currentForce = 0f;
+
+        currentTime = Time.time;
+        timeSinceLastMove = currentTime;
     }
 
     void Update()
@@ -98,6 +104,24 @@ public class PlayerController : MonoBehaviour
         // Find the camera, the attached canvas, the attached text 'HealthDisplay' and set the text to the health value
         // GameObject.Find("Main Camera").transform.Find("Canvas").transform.Find("HealthDisplay").GetComponent<UnityEngine.UI.Text>().text = "Health: " + health; 
         // GameObject.Find("Main Camera").transform.Find("Canvas").transform.Find("FuelDisplay").GetComponent<UnityEngine.UI.Text>().text = "Fuel: " + fuel;
+        // if the player did not move forward in the last 3 seconds, its game over
+        currentTime = Time.time;
+        
+        //get current velocity
+        float currentVelocity = rb.velocity.z;
+        if(currentVelocity > 1)
+        {
+            timeSinceLastMove = currentTime;
+        }
+        else
+        {
+            Debug.Log("Time since last move: " + (currentTime - timeSinceLastMove));
+        }
+        if(currentTime - timeSinceLastMove > 3)
+        {
+            FindObjectOfType<GameOverController>().TriggerGameOver();
+            GameObject.Find("Timer").GetComponent<Timer>().StopTimer();
+        }
 
     }
 
