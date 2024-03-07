@@ -16,6 +16,7 @@ public class StoryTelling : MonoBehaviour
 
     public Instruction[] instructions; // Array of instructions with their parameters
     public TextMeshProUGUI textComponent; 
+    private Coroutine displayInstructionCoroutine;
 
     void Start()
     {
@@ -25,21 +26,29 @@ public class StoryTelling : MonoBehaviour
             return;
         }
         
-        StartCoroutine(DisplayInstructionsSequence());
+        // Stop coroutine from previous execution
+        if(displayInstructionCoroutine != null)
+        {
+            StopCoroutine(displayInstructionCoroutine);
+        }
+
+        // Start coroutine
+        displayInstructionCoroutine = StartCoroutine(DisplayInstructionsSequence());
     }
 
     IEnumerator DisplayInstructionsSequence()
     {
         foreach (var instruction in instructions)
         {
+            Debug.Log($"Displaying instruction: {instruction.text}");
             // Delay display of text
-            yield return new WaitForSeconds(instruction.initialDelay);
+            yield return new WaitForSecondsRealtime(instruction.initialDelay);
 
             textComponent.text = instruction.text; // Set current instruction
             textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, 1);
 
             // Wait for the display time
-            yield return new WaitForSeconds(instruction.displayTime);
+            yield return new WaitForSecondsRealtime(instruction.displayTime);
 
             // Start fade out
             float currentTime = 0;
@@ -47,7 +56,7 @@ public class StoryTelling : MonoBehaviour
             {
                 float alpha = Mathf.Lerp(1, 0, currentTime / instruction.fadeDuration);
                 textComponent.color = new Color(textComponent.color.r, textComponent.color.g, textComponent.color.b, alpha);
-                currentTime += Time.deltaTime;
+                currentTime += Time.unscaledDeltaTime;
                 yield return null;
             }
 
