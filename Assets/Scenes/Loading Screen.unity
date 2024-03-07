@@ -495,7 +495,8 @@ MonoBehaviour:
     initialDelay: 0
     displayTime: 2
     fadeDuration: 1
-  - text: Well then, run Drake and don't look back. I will be chasing you
+  - text: 'Sargeant: Well then, run Drake and don''t look back. I will be chasing
+      you'
     initialDelay: 0
     displayTime: 4
     fadeDuration: 1
